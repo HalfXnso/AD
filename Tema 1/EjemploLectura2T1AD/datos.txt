@@ -1,0 +1,5 @@
+TIER S: fresas, nectarina, naranja
+TIER A: plátano, sandía
+TIER B: mango, kiwi
+TIER C: Piña, paraguayo
+TIER D: Higo

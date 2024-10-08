@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pais>
+    <nombre>Argentina</nombre>
+    <capital>Buenos Aires</capital>
+    <superficie>12313.0</superficie>
+    <habitantes>1231</habitantes>
+    <costero>false</costero>
+</pais>

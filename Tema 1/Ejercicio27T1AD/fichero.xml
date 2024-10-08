@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<empleado>
+    <idEmpleado>4321GFD</idEmpleado>
+    <nombre>Juan</nombre>
+    <apellidos>Salchi chón</apellidos>
+    <departamento>Telecomunicaciones</departamento>
+    <dni>46732719D</dni>
+    <sueldo>4200.97</sueldo>
+</empleado>
