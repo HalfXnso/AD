@@ -23,43 +23,50 @@ public class PracticaT2AD {
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
         Connection miConexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
-        transaccionVentaEntradas(miConexion, 101, 4);
+        transaccionVentaEntradas(miConexion, 13, 4);
     }
 
     public static void transaccionVentaEntradas(Connection miConexion, int numEntradas, int idEvento) throws SQLException {
         int registrosAforo;
         int registrosNumEntradas;
         int registroRecaudacion;
+        int registrosAforoInicial;
         int entradas = 0;
         int numAforo = 0;
         
         ResultSet resultado;
         String sentenciaActualizaNumEntradas = "UPDATE entradas SET entradasVendidas = entradasVendidas + ? WHERE idEvento = ?";
         String sentenciaActualizaRecaudacion = "UPDATE entradas SET recaudacionEvento = entradasVendidas * precioEvento WHERE idEvento =? ";
-        String sentenciaActualizaAforoEvento = "SELECT aforoEvento FROM entradas WHERE idEvento= ?";
+        String sentenciaConsultaAforoEvento = "SELECT aforoEvento FROM entradas WHERE idEvento= ?";
         String sentenciaConsultaNumEntradas = "SELECT entradasVendidas FROM entradas WHERE idEvento= ?";
 
         miConexion.setAutoCommit(false);
-        PreparedStatement sentencia = miConexion.prepareStatement(sentenciaActualizaAforoEvento);
-        sentencia.setInt(1, numEntradas);
-        sentencia.setInt(2, idEvento);
-        registrosAforo = sentencia.executeUpdate();
-
-        sentencia = miConexion.prepareStatement(sentenciaActualizaNumEntradas);
-        sentencia.setInt(1, numEntradas);
-        sentencia.setInt(2, idEvento);
-
-        registrosNumEntradas = sentencia.executeUpdate();
-
-        sentencia = miConexion.prepareStatement("");
+        
+        PreparedStatement sentencia = miConexion.prepareStatement(sentenciaConsultaNumEntradas);
         sentencia.setInt(1, idEvento);
-
-        registroRecaudacion = sentencia.executeUpdate();
-
         resultado = sentencia.executeQuery();
         while (resultado.next()) {
             entradas = resultado.getInt("entradasVendidas");
-        }    
+        }
+         sentencia = miConexion.prepareStatement(sentenciaActualizaNumEntradas);
+        sentencia.setInt(1, numEntradas);
+        sentencia.setInt(2, idEvento);
+        registrosNumEntradas = sentencia.executeUpdate();
+        System.out.println(registrosNumEntradas);
+         
+        sentencia = miConexion.prepareStatement(sentenciaConsultaAforoEvento);
+        sentencia.setInt(1, idEvento);
+        resultado = sentencia.executeQuery();
+        while (resultado.next()) {
+            numAforo = resultado.getInt("aforoEvento");
+        }
+        
+          
+         sentencia = miConexion.prepareStatement(sentenciaActualizaRecaudacion);
+        sentencia.setInt(1, idEvento);
+        registrosAforo = sentencia.executeUpdate();
+        System.out.println(registrosAforo);
+        
         if (numAforo < (entradas+numEntradas)) {
             // deshacemos cambios
             miConexion.rollback();
@@ -67,7 +74,7 @@ public class PracticaT2AD {
         } else {
             // Confirmamos la transaccion
             System.out.println("Compra de entradas Realizada");
-            miConexion.commit();
+            miConexion.commit();    
         }
         miConexion.setAutoCommit(true);
     }

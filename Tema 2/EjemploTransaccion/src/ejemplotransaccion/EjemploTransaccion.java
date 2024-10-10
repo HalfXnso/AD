@@ -53,8 +53,8 @@ public class EjemploTransaccion {
         sentencia = miConexion.prepareStatement(sentenciaActualizaDestino);
         sentencia.setDouble(1, cantidad);
         sentencia.setInt(2, cuentaDestino);
-
         registrosDestino = sentencia.executeUpdate();
+        
         sentencia = miConexion.prepareStatement(sentenciaConsultaSaldo);
         sentencia.setInt(1, cuentaOrigen);
 
