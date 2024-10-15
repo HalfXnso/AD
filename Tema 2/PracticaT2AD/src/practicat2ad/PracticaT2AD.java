@@ -33,7 +33,7 @@ public class PracticaT2AD {
         int registrosAforoInicial;
         int entradas = 0;
         int numAforo = 0;
-        
+        //Lo más importante es saber el orden de las cosas, qué es lo primero que necesito para ejecutar el codigo, necesito saber cuantas entradas quedan,etc
         ResultSet resultado;
         String sentenciaActualizaNumEntradas = "UPDATE entradas SET entradasVendidas = entradasVendidas + ? WHERE idEvento = ?";
         String sentenciaActualizaRecaudacion = "UPDATE entradas SET recaudacionEvento = entradasVendidas * precioEvento WHERE idEvento =? ";

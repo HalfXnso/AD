@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-oct-2024 12:17:52 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Peliculas" table="peliculas" catalog="videoclub" optimistic-lock="version">
+        <id name="codpelicula" type="int">
+            <column name="codpelicula" />
+            <generator class="assigned" />
+        </id>
+        <property name="titulo" type="string">
+            <column name="titulo" length="50" />
+        </property>
+        <property name="tema" type="string">
+            <column name="tema" length="20" />
+        </property>
+        <property name="duracion" type="java.lang.Integer">
+            <column name="duracion" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="4" />
+        </property>
+    </class>
+</hibernate-mapping>
